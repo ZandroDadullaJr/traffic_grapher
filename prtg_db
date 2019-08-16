@@ -1,0 +1,20 @@
+CREATE TABLE `prtg`.`pldt_min`
+(
+    `date` VARCHAR(100) NOT NULL,
+    `kbit` FLOAT NOT NULL
+
+)
+
+
+
+LOAD DATA INFILE  
+'aug13_min_pldt200.csv'
+INTO TABLE pldt_min  
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(date,kbit);
+
+
+DELETE FROM pldt_min WHERE kbit = 0
