@@ -1,138 +1,96 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>Line Chart</title>
-		<!-- 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-		<script src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
-		<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-		<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
-		<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.3"></script> -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-		<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+    <head>
+        <title></title>
 
-		<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
-		<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.3"></script>
-		<style>
-			canvas {
-				-moz-user-select: none;
-				-webkit-user-select: none;
-				-ms-user-select: none;
-			}
-		</style>
-	</head>
-	<body>
-		<div style="width:1000px">
-			<canvas id="chart1"></canvas>
-		</div>
-		<br>
-		<br>
-		Chart Type:
-		<select id="type">
-			<option value="line">Line</option>
-			<option value="bar">Bar</option>
-		</select>
-		<button id="update">update</button>
-		<button onclick="resetZoom()">Reset Zoom</button>
-		
-		<script>
-			function randomNumber(min, max) {
-				return Math.random() * (max - min) + min;
-			}
-			function randomBar(date, lastClose) {
-				var open = randomNumber(lastClose * 0.95, lastClose * 1.05).toFixed(2);
-				var close = randomNumber(open * 0.95, open * 1.05).toFixed(2);
-				return {
-					t: date.valueOf(),
-					y: close
-				};
-			}
-			var dateFormat = 'MMMM DD YYYY';
-			var date = moment('April 01 2017', dateFormat);
-			var data = [randomBar(date, 300)];
-			while (data.length < 365) {
-				date = date.clone().add(1, 'd');
-				if (date.isoWeekday() <= 5) {
-					data.push(randomBar(date, data[data.length - 1].y));
-				}
-			}
-			var ctx = document.getElementById('chart1').getContext('2d');
-			ctx.canvas.width = 1000;
-			ctx.canvas.height = 300;
-			var color = Chart.helpers.color;
-			var cfg = {
-				type: 'bar',
-				data: {
-					datasets: [{
-						label: 'PRTG Traffic graph trend',
-						backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
-						borderColor: window.chartColors.red,
-						data: data,
-						type: 'bar',
-						pointRadius: 0,
-						fill: false,
-						lineTension: 0,
-						borderWidth: 2
-					}]
-				},
-				options: {
-					scales: {
-						xAxes: [{
-							type: 'time',
-							distribution: 'series',
-							ticks: {
-								source: 'data',
-								autoSkip: true
-							}
-						}],
-						yAxes: [{
-							scaleLabel: {
-								display: true,
-								labelString: 'Bandwidth (Mbps)'
-							}
-						}]
-					},
-									plugins: {
-					zoom: {
-						zoom: {
-							enabled: true,
-							drag: true,
-							mode: 'x',
-							speed: 0.05
-						}
-					}
-				},
-					tooltips: {
-						intersect: false,
-						mode: 'index',
-						callbacks: {
-							label: function(tooltipItem, myData) {
-								var label = myData.datasets[tooltipItem.datasetIndex].label || '';
-								if (label) {
-									label += ': ';
-								}
-								label += parseFloat(tooltipItem.value).toFixed(2);
-								return label;
-							}
-						}
-					}
-				}
-			};
-			var chart = new Chart(ctx, cfg);
-			document.getElementById('update').addEventListener('click', function() {
-			    var type = document.getElementById('type').value;
-			    chart.config.data.datasets[0].type = type;
-			    chart.update();
-			});
-			window.resetZoom = function() {
-			    window.myLine.resetZoom();
-			};
+        <script async="true" type="text/javascript" src="get_data.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <style>
+      /* [COSMETICS - DOES NOT MATTER] */
+      html, body {
+        font-family: arial;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      table tr td {
+        border: 1px solid #000;
+        padding: 10px;
+      }
+    </style>
+    </head>
+    <body>
 
-			window.onload = function() {
-			    var ctx = document.getElementById('chart1').getContext('2d');
-			    window.myLine = new window.Chart(ctx, cfg);
-			};
-		</script>
-	</body>
+
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        
+        <div>
+            <h3>Top 10 Highest Instance</h3>
+            <div id="top">
+                
+            </div>
+            
+        </div>
+
+        <script async="true" type="text/javascript">
+        function createObject() {
+            // var data = kbit;
+
+            var Options = {
+                chart: {
+                    renderTo: 'container',
+                    zoomType: 'x'
+                },
+                title: {
+                    text: "PRTG Bandwidth Utilization"
+                },
+                credits: {
+                    enabled: false
+                },
+                yAxis: [{
+                    title: {
+                        text: 'Bandwidth (Kbps)'
+                    }
+                }],
+                xAxis: {
+                    // type: 'category',
+                    tickInterval: kbit.length/4,
+                    labels: {
+                        enabled: true,
+                        formatter: function() {
+                            return kbit[this.value];
+                        },
+                    }
+                },
+                series: [{
+                    type: 'area',
+                    name: 'Bandwidth',
+                    data: kbit,
+                    marker: {
+                        lineWidth: 2,
+                        lineColor: Highcharts.getOptions().colors[3],
+                        fillColor: 'white'
+                    },
+                    turboThreshold: 5000,
+                    fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
+                },
+                stops: [
+                    [0, Highcharts.getOptions().colors[0]],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                ]
+            }
+                }],
+            };
+            Highcharts.chart(Options);
+        }
+        </script>
+    </body>
 </html>

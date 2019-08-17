@@ -17,7 +17,7 @@ function getData() {
         ]);
         kbit2.push(parseFloat(xvar[i]));
     }
-    createObject(kbit);
+    createObject();
 }
 
 
@@ -44,7 +44,7 @@ var date2 = [];
 getData();
 getTop();
 
-console.log(top2);
+// console.log(top2);
 // console.log(date);
 
 function createTable(tableData) {
