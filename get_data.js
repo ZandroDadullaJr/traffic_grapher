@@ -9,13 +9,16 @@ function getData() {
     var result = httpGet("query_data.php");
     var resultArr = JSON.parse(result);
     xvar = resultArr;
-
+    console.log(xvar);
     for (var i = 0; i < xvar.length; i++) {
-        kbit.push([
+        kbit_in.push([
             xvar[i].date,
-            parseFloat(xvar[i].kbit)
+            parseFloat(xvar[i].kbit_in)
         ]);
-        kbit2.push(parseFloat(xvar[i]));
+        kbit_out.push([
+            xvar[i].date,
+            parseFloat(xvar[i].kbit_out)
+        ]);
     }
     createObject();
 }
@@ -28,13 +31,13 @@ function getTop() {
     for (var i = 0; i < xvar.length; i++) {
         top2.push([
             xvar[i].date,
-            parseFloat(xvar[i].kbit)
+            parseFloat(xvar[i].kbit_in)
         ]);
     }
 }
 
-var kbit = [];
-var kbit2 = [];
+var kbit_in = [];
+var kbit_out = [];
 
 var date = [];
 var xvar = [];

@@ -2,7 +2,7 @@
 	include 'prtg_db.php';
 	
 	function get_top(){
-		$s_val_query = "SELECT * FROM pldt_min ORDER BY kbit DESC LIMIT 10";
+		$s_val_query = "SELECT date,kbit_in FROM globe_month ORDER BY kbit_in DESC LIMIT 10";
 		$s_val_result = $GLOBALS['conn']->query($s_val_query);
 		$s_val_data = array();
 		if ($s_val_result->num_rows > 0) {

@@ -2,7 +2,7 @@
 	include 'prtg_db.php';
 	
 	function get_data(){
-		$s_val_query = "SELECT * FROM pldt_min ORDER BY bw_id DESC";
+		$s_val_query = "SELECT * FROM globe_month";
 		$s_val_result = $GLOBALS['conn']->query($s_val_query);
 		$s_val_data = array();
 		if ($s_val_result->num_rows > 0) {
