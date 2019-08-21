@@ -54,7 +54,7 @@ function create_PLDT_Object() {
                     type: 'areaspline',
                     name: 'Bandwidth Out',
                     data: kbit_out,
-                    color: '#F44336',
+                    color: '#ff9f43',
                     turboThreshold: 500000,
                     
                 }],
@@ -117,7 +117,7 @@ function create_EASTERN_Object() {
                     type: 'areaspline',
                     name: 'Bandwidth Out',
                     data: kbit_out,
-                    color: '#F44336',
+                    color: '#ff9f43',
                     turboThreshold: 500000,
                     
                 }],
@@ -179,7 +179,7 @@ function create_GLOBE_Object() {
                     type: 'areaspline',
                     name: 'Bandwidth Out',
                     data: kbit_out,
-                    color: '#F44336',
+                    color: '#ff9f43',
                     turboThreshold: 500000,
                     
                 }],

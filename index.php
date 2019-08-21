@@ -21,7 +21,7 @@
         </style>
     </head>
     <body>
-        <div style="height: 100%;">
+        <div>
             <div id="pldt" style="min-width: 310px; margin: 0 auto; width: 90%"></div>
             <div id="eastern" style="min-width: 310px;margin: 0 auto; width: 90%"></div>
             <div id="globe" style="min-width: 310px;margin: 0 auto; width: 90%"></div>
