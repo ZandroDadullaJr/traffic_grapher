@@ -5,11 +5,10 @@ function httpGet(theUrl) {
     return xmlHttp.responseText;
 }
 
-function getData() {
-    var result = httpGet("query_data.php");
+function getData(isp) {
+    var result = httpGet("query_" + isp + "_data.php");
     var resultArr = JSON.parse(result);
     xvar = resultArr;
-    console.log(xvar);
     for (var i = 0; i < xvar.length; i++) {
         kbit_in.push([
             xvar[i].date,
@@ -20,9 +19,23 @@ function getData() {
             parseFloat(xvar[i].kbit_out)
         ]);
     }
-    createObject();
+    sendData(isp);
+    kbit_in = [];
+    kbit_out = [];
+    
 }
 
+function sendData(isp){
+  if (isp == 'pldt') {
+    create_PLDT_Object();
+  }
+  if (isp == 'eastern') {
+    create_EASTERN_Object();
+  }
+  if (isp == 'globe') {
+    create_GLOBE_Object();
+  }
+}
 
 function getTop() {
     var result = httpGet("query_top.php");
@@ -38,14 +51,18 @@ function getTop() {
 
 var kbit_in = [];
 var kbit_out = [];
-
 var date = [];
 var xvar = [];
 var top2 = [];
 var date2 = [];
+var isp = ['pldt', 'eastern', 'globe'];
 
-getData();
-getTop();
+
+function main(){
+  for(i = 0; i < isp.length; i++){
+    getData(isp[i]);
+  }
+}
 
 // console.log(top2);
 // console.log(date);
@@ -70,4 +87,10 @@ function createTable(tableData) {
   document.body.appendChild(table);
 }
 
-createTable(top2)
+
+main();
+getTop();
+
+createTable(top2);
+createTable(top2);
+createTable(top2);
