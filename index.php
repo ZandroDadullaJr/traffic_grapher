@@ -29,16 +29,34 @@
         <div>
             <div>
                 <h3>Top 10 Highest Instance: PLDT</h3>
-                <!-- <div id="top"></div> -->
+                <div>
+                    <table id="topBandwidth">
+                        <tr>
+                            <th>Date</th>
+                            <th>Bandwidth In</th>
+                            <th>Bandwidth Out</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+           <!--  <div>
+                <h3>Top 10 Highest Instance: PLDT</h3>
+                <div id="top"></div>
             </div>
             <div>
                 <h3>Top 10 Highest Instance: PLDT</h3>
-                <!-- <div id="top"></div> -->
-            </div>
-            <div>
-                <h3>Top 10 Highest Instance: PLDT</h3>
-                <!-- <div id="top"></div> -->
-            </div>
+                <div id="top"></div>
+            </div> -->
         </div>
         
         <script async="true" type="text/javascript" src="graphs.js"></script>
