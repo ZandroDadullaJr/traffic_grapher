@@ -23,8 +23,8 @@
     <body>
         <div>
             <div id="pldt" style="min-width: 310px; margin: 0 auto; width: 90%"></div>
-            <div id="eastern" style="min-width: 310px;margin: 0 auto; width: 90%"></div>
-            <div id="globe" style="min-width: 310px;margin: 0 auto; width: 90%"></div>
+<!--             <div id="eastern" style="min-width: 310px;margin: 0 auto; width: 90%"></div>
+            <div id="globe" style="min-width: 310px;margin: 0 auto; width: 90%"></div> -->
         </div>
         <div>
             <div>
@@ -59,7 +59,7 @@
             </div> -->
         </div>
         
-        <script async="true" type="text/javascript" src="graphs.js"></script>
-        <script async="true" type="text/javascript" src="get_data.js"></script>
+        <script async="true" type="text/javascript" src="js/graphs.js"></script>
+        <script async="true" type="text/javascript" src="js/get_data.js"></script>
     </body>
 </html>

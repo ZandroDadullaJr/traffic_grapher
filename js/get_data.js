@@ -6,7 +6,7 @@ function httpGet(theUrl) {
 }
 
 function getData(isp) {
-    var result = httpGet("query_" + isp + "_data.php");
+    var result = httpGet("backend/query_" + isp + "_data.php");
     var resultArr = JSON.parse(result);
     xvar = resultArr;
     for (var i = 0; i < xvar.length; i++) {
@@ -38,7 +38,7 @@ function sendData(isp){
 }
 
 function getTop() {
-    var result = httpGet("query_top.php");
+    var result = httpGet("backend/query_top.php");
     var resultArr = JSON.parse(result);
     xvar = resultArr;
     for (var i = 0; i < xvar.length; i++) {
